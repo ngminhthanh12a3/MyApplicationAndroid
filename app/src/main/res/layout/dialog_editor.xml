@@ -8,87 +8,28 @@
     android:paddingVertical="20dp">
 
     <TextView
-        android:id="@+id/textViewFullNameLabel"
+        android:id="@+id/textViewProfileFieldLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/full_name_label"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputFullnameLayout"
+        android:id="@+id/textInputProfileFieldLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFullNameLabel">
+        app:layout_constraintTop_toBottomOf="@+id/textViewProfileFieldLabel">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputFullName"
+            android:id="@+id/textInputProfileField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/your_full_name_placeholder"
-            android:inputType="text"
-            android:textColorHint="#78909C"
-            tools:ignore="TouchTargetSizeCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/textViewEmailLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/e_mail_label"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputFullnameLayout" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputEmailLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:endIconMode="clear_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEmailLabel">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInpuEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/your_e_mail_place_holder"
-            android:inputType="text"
-            android:textColorHint="#78909C"
-            tools:ignore="TouchTargetSizeCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/textViewPhoneLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/phone_number_label"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEmailLayout" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputPhoneLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:endIconMode="clear_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPhoneLabel">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/your_phone_number_placeholder"
+            android:hint="@string/your_update_profile"
             android:inputType="text"
             android:textColorHint="#78909C"
             tools:ignore="TouchTargetSizeCheck" />
@@ -102,7 +43,7 @@
         android:text="@string/cancelbtn_text"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputPhoneLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputProfileFieldLayout" />
 
     <Button
         android:id="@+id/buttonSubmit"
@@ -112,7 +53,7 @@
         android:text="@string/submit_btn_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/textInputPhoneLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputProfileFieldLayout" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

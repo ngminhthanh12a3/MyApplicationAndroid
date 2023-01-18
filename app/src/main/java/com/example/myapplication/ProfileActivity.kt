@@ -10,7 +10,6 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var textViewFullName:TextView
     private lateinit var textViewEmail:TextView
     private lateinit var textViewPhone:TextView
-    private lateinit var dialog: DialogEditor
 //    val profileData = ProfileData("Eljad Eendaz","prelookstudio@gmail.com","+1 (783) 0986 8786")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,18 +25,23 @@ class ProfileActivity : AppCompatActivity() {
         textViewEmail.text = GlobalVars.userProfileData["email"]
         textViewPhone.text = GlobalVars.userProfileData["phoneNumber"]
 
-        dialog = DialogEditor { onSubmitFinish() }
-        textViewFullName.setOnClickListener { dialog.show(supportFragmentManager, "Dialog Editor") }
-        textViewEmail.setOnClickListener { dialog.show(supportFragmentManager, "Dialog Editor") }
-        textViewPhone.setOnClickListener { dialog.show(supportFragmentManager, "Dialog Editor") }
+        textViewFullName.setOnClickListener { DialogEditor("fullName") {onSubmitFinish("fullName")}.show(supportFragmentManager, "Dialog Editor") }
+        textViewEmail.setOnClickListener { DialogEditor("email") {onSubmitFinish("email")}.show(supportFragmentManager, "Dialog Editor") }
+        textViewPhone.setOnClickListener { DialogEditor("phoneNumber") {onSubmitFinish("phoneNumber")}.show(supportFragmentManager, "Dialog Editor") }
     }
 
-    private fun onSubmitFinish()
+    private fun onSubmitFinish(fieldName:String)
     {
-        textViewName.text = GlobalVars.userProfileData["fullName"]
-        textViewFullName.text = GlobalVars.userProfileData["fullName"]
-        textViewEmail.text = GlobalVars.userProfileData["email"]
-        textViewPhone.text = GlobalVars.userProfileData["phoneNumber"]
+        when(fieldName)
+        {
+            "fullName" -> {
+                textViewName.text = GlobalVars.userProfileData[fieldName]
+                textViewFullName.text = GlobalVars.userProfileData[fieldName]
+            }
+            "email" -> textViewEmail.text = GlobalVars.userProfileData[fieldName]
+            "phoneNumber" -> textViewPhone.text = GlobalVars.userProfileData[fieldName]
+        }
+
     }
 
 }
