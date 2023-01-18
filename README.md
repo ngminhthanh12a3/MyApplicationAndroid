@@ -6,4 +6,4 @@
 
 ## Nguyễn Thị Thanh Xuân - 19207121
 
-[Video demo](https://1drv.ms/v/s!AjI1rrhlQ0yshEjZJXfupcKswSnG?e=7c97Ng)
+https://user-images.githubusercontent.com/93377382/213090389-17d40e14-50ea-45d4-aab7-0116da82d6c3.mov
