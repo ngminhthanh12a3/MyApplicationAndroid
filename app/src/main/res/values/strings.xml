@@ -24,4 +24,12 @@
     <string name="login_text_btn">LOGIN</string>
     <string name="don_t_have_an_account">Don’t have an account?</string>
     <string name="sign_up_label">Sign Up</string>
+    <string name="default_profile_name">Eljad Eendaz</string>
+    <string name="full_name_label">Full name</string>
+    <string name="phone_number_label">Phone Number</string>
+    <string name="your_full_name_placeholder">Your Full name</string>
+    <string name="your_e_mail_place_holder">Your E-mail</string>
+    <string name="your_phone_number_placeholder">Your Phone number</string>
+    <string name="cancelbtn_text">Cancel</string>
+    <string name="submit_btn_text">Submit</string>
 </resources>
