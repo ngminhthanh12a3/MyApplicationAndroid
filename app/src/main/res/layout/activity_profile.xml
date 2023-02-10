@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/profile_background"
     android:paddingHorizontal="15dp"
-    tools:context=".ProfileActivity">
+    tools:context=".screens.profile.ProfileActivity">
 
 
     <com.google.android.material.imageview.ShapeableImageView

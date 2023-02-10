@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.screens.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.example.myapplication.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -24,7 +25,9 @@ class DialogEditor(private val fieldName: String, private  val onSubmitFinish: (
         rootView.findViewById<Button>(R.id.buttonCancel).setOnClickListener { onCancelClick() }
         rootView.findViewById<Button>(R.id.buttonSubmit).setOnClickListener { onSubmitClick() }
 
-        textInputProfileField = rootView.findViewById<TextInputLayout>(R.id.textInputProfileFieldLayout).findViewById(R.id.textInputProfileField)
+        textInputProfileField = rootView.findViewById<TextInputLayout>(R.id.textInputProfileFieldLayout).findViewById(
+            R.id.textInputProfileField
+        )
         textViewProfileFieldLabel = rootView.findViewById(R.id.textViewProfileFieldLabel)
 
         textInputProfileField.setText(GlobalVars.userProfileData[fieldName])

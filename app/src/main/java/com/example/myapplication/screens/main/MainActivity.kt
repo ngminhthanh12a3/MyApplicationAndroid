@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.screens.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,10 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.example.myapplication.screens.onboading.OnboadingItemsAdapter
+import com.example.myapplication.screens.onboading.OnboardingItem
+import com.example.myapplication.R
+import com.example.myapplication.screens.welcome.Welcome
 
 class MainActivity : AppCompatActivity() {
     private lateinit var onboadingItemsAdapter: OnboadingItemsAdapter
@@ -25,9 +29,11 @@ class MainActivity : AppCompatActivity() {
     private fun setOnboardingItems()
     {
         textViewTitleArray = resources.getStringArray(R.array.text_view_title)
-        onboadingItemsAdapter = OnboadingItemsAdapter(listOf(OnboardingItem(R.drawable.pic_onboarding_1, textViewTitleArray[0]),
+        onboadingItemsAdapter = OnboadingItemsAdapter(listOf(
+            OnboardingItem(R.drawable.pic_onboarding_1, textViewTitleArray[0]),
             OnboardingItem(R.drawable.pic_onboarding_2, textViewTitleArray[1]),
-            OnboardingItem(R.drawable.pic_onboarding_3, textViewTitleArray[2])))
+            OnboardingItem(R.drawable.pic_onboarding_3, textViewTitleArray[2])
+        ))
         val onboardingViewPager = findViewById<ViewPager2>(R.id.viewPager2)
         //
         var index = 0
@@ -78,7 +84,9 @@ class MainActivity : AppCompatActivity() {
         for (i in indicators.indices){
             indicators[i] = ImageView(applicationContext)
             indicators[i]?.let {
-                it.setImageDrawable(ContextCompat.getDrawable(applicationContext,R.drawable.indicator_inactive_background))
+                it.setImageDrawable(ContextCompat.getDrawable(applicationContext,
+                    R.drawable.indicator_inactive_background
+                ))
                 it.layoutParams = layoutParams
                 indicatorContainer.addView(it)
             }
@@ -93,10 +101,14 @@ class MainActivity : AppCompatActivity() {
             val imageView = indicatorContainer.getChildAt(i) as ImageView
             if(i == position)
             {
-                imageView.setImageDrawable(ContextCompat.getDrawable(applicationContext,R.drawable.indicator_active_background))
+                imageView.setImageDrawable(ContextCompat.getDrawable(applicationContext,
+                    R.drawable.indicator_active_background
+                ))
             }
             else
-                imageView.setImageDrawable(ContextCompat.getDrawable(applicationContext,R.drawable.indicator_inactive_background))
+                imageView.setImageDrawable(ContextCompat.getDrawable(applicationContext,
+                    R.drawable.indicator_inactive_background
+                ))
         }
     }
 }

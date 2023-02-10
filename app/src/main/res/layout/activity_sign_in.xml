@@ -7,7 +7,7 @@
     android:background="@drawable/signin_background"
     android:paddingHorizontal="20dp"
     android:theme="@style/Theme.MyApplication"
-    tools:context=".SignInActivity">
+    tools:context=".screens.signin.SignInActivity">
 
     <ImageButton
         android:id="@+id/imageBackButton"
