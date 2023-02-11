@@ -6,13 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.myapplication.R
+import com.example.myapplication.singletonData.DataStore
+import com.example.myapplication.viewModels.ProfileViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-class DialogEditor(private val fieldName: String, private  val onSubmitFinish: () -> Unit) : DialogFragment() {
+val profileFieldLabel = mutableMapOf("fullNameLabel" to "Full name",
+                                    "emailLabel" to "E-mail",
+                                    "phoneNumberLabel" to "Phone number")
+
+class DialogEditor(private val fieldName: String, private val viewModel:ProfileViewModel) : DialogFragment() {
     private lateinit var textInputProfileField:TextInputEditText
     private lateinit var textViewProfileFieldLabel:TextView
     override fun onCreateView(
@@ -30,26 +35,15 @@ class DialogEditor(private val fieldName: String, private  val onSubmitFinish: (
         )
         textViewProfileFieldLabel = rootView.findViewById(R.id.textViewProfileFieldLabel)
 
-        textInputProfileField.setText(GlobalVars.userProfileData[fieldName])
-        textViewProfileFieldLabel.text = GlobalVars.userProfileData[fieldName + "Label"]
+        textInputProfileField.setText(DataStore.currentUserData[fieldName])
+        textViewProfileFieldLabel.text = profileFieldLabel[fieldName + "Label"]
 
         return rootView
     }
 
     private fun onSubmitClick() {
 
-        if(textInputProfileField.text.isNullOrBlank())
-        {
-            Toast.makeText(context, "Blank Input",
-                Toast.LENGTH_SHORT).show()
-        }
-        else
-        {
-            GlobalVars.userProfileData[fieldName] = textInputProfileField.text.toString()
-
-            onSubmitFinish()
-            dismiss()
-        }
+        viewModel.dialogInputValid(textInputProfileField.text, fieldName) { dismiss() }
 
     }
 

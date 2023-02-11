@@ -33,4 +33,6 @@
     <string name="cancelbtn_text">Cancel</string>
     <string name="submit_btn_text">Submit</string>
     <string name="your_update_profile">Your update data</string>
+    <string name="signup_title">Signup</string>
+    <string name="sign_up_upper_label">SIGN UP</string>
 </resources>

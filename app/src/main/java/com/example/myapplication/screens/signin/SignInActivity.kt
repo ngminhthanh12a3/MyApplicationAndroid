@@ -2,48 +2,60 @@ package com.example.myapplication.screens.signin
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.R
+import com.example.myapplication.databinding.ActivitySignInBinding
 import com.example.myapplication.screens.profile.ProfileActivity
-import com.google.android.material.textfield.TextInputEditText
+import com.example.myapplication.screens.signup.SignUpActivity
+import com.example.myapplication.viewModels.SignInViewModel
 
 class SignInActivity : AppCompatActivity() {
-    private lateinit var imageBackButton:ImageButton
-    private lateinit var emailInputText:TextInputEditText
-    private lateinit var passwordInputText:TextInputEditText
-    private lateinit var loginBtn:Button
+    private lateinit var binding: ActivitySignInBinding
+    private lateinit var viewModel: SignInViewModel
 
-    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_in)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
+        viewModel = ViewModelProvider(this)[SignInViewModel::class.java]
 
-        imageBackButton = findViewById(R.id.imageBackButton)
-        imageBackButton.setOnClickListener{
+        binding.imageBackButton.setOnClickListener{
             onBackPressed()
         }
 
-        emailInputText = findViewById(R.id.emailInputText)
-        passwordInputText = findViewById(R.id.passwordInputText)
+        binding.buttonLogin.setOnClickListener { loginOnClick() }
 
-        loginBtn = findViewById(R.id.buttonLogin)
-        loginBtn.setOnClickListener { loginOnClick() }
+        binding.signUpText.setOnClickListener { onSignUpNavigate() }
+
+        listenerSuccessEvent()
+        listenerErrorEvent()
+    }
+
+    private fun listenerErrorEvent() {
+        viewModel.isErrorEvent.observe(this) { errMsg ->
+            Toast.makeText(this, errMsg, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun listenerSuccessEvent() {
+        viewModel.isSuccessEvent.observe(this) { isSuccess ->
+            if(isSuccess)
+            {
+                // Success
+                Toast.makeText(this, "SignIn Success", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, ProfileActivity::class.java))
+            }
+        }
+    }
+
+    private fun onSignUpNavigate() {
+        startActivity(Intent(this, SignUpActivity::class.java))
+        finish()
     }
 
     private fun loginOnClick() {
-        if(emailInputText.text.toString() == "username@gmail.com" && passwordInputText.text.toString() == "123456")
-        {
-            startActivity(Intent(applicationContext, ProfileActivity::class.java))
-            finish()
-        }
-
-        else
-        {
-            Toast.makeText(this, "Login failed!",
-                Toast.LENGTH_SHORT).show()
-        }
+        viewModel.onLogin(binding.emailInputText.text.toString(), binding.passwordInputText.text.toString())
     }
 }
