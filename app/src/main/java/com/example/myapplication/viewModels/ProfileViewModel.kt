@@ -7,6 +7,12 @@ import androidx.lifecycle.ViewModel
 import com.example.myapplication.singletonData.DataStore
 
 class ProfileViewModel:ViewModel() {
+    val currentUserData: LiveData<MutableMap<String, String>>
+        get() = DataStore.currentUserData
+
+    private val _userDataUpdateLabel: MutableLiveData<String> = MutableLiveData("")
+    val userDatUpdateLabel: LiveData<String>
+        get() = _userDataUpdateLabel
 
     private var _isErrorEvent: MutableLiveData<String> = MutableLiveData()
     val isErrorEvent: LiveData<String>
@@ -19,15 +25,17 @@ class ProfileViewModel:ViewModel() {
     fun dialogInputValid(dialogInput: Editable?, userDataKey: String, dialogDimiss: () -> Unit) {
         if(dialogInput?.isNotEmpty() == true)
         {
-            // Update data
-            DataStore.currentUserData[userDataKey] = dialogInput.toString()
+            val currentUserData = DataStore.currentUserData.value
+            currentUserData?.set(userDataKey, dialogInput.toString())
+
+            DataStore.currentUserData.value = currentUserData
+
             dialogDimiss()
             return _isSuccessEvent.postValue(userDataKey)
         }
 
         // Throw Error
         _isErrorEvent.postValue("Blank Input")
-
     }
 
 }

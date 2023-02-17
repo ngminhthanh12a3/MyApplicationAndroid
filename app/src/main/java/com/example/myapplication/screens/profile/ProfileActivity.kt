@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityProfileBinding
-import com.example.myapplication.singletonData.DataStore
 import com.example.myapplication.viewModels.ProfileViewModel
 
 class ProfileActivity : AppCompatActivity() {
@@ -19,12 +18,10 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile)
+        binding.lifecycleOwner = this
         viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
+        binding.viewModel = viewModel
 
-        binding.textViewName.text = DataStore.currentUserData["fullName"]
-        binding.textViewFullName.text = DataStore.currentUserData["fullName"]
-        binding.textViewEmail.text = DataStore.currentUserData["email"]
-        binding.textViewPhone.text = DataStore.currentUserData["phoneNumber"]
 
         binding.textViewFullName.setOnClickListener {
             DialogEditor("fullName", viewModel).show(
@@ -62,14 +59,14 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun onDialogSubmitFinish(fieldName: String) {
-        when (fieldName) {
-            "fullName" -> {
-                binding.textViewName.text = DataStore.currentUserData[fieldName]
-                binding.textViewFullName.text = DataStore.currentUserData[fieldName]
-            }
-            "email" -> binding.textViewEmail.text = DataStore.currentUserData[fieldName]
-            "phoneNumber" -> binding.textViewPhone.text = DataStore.currentUserData[fieldName]
-        }
+//        when (fieldName) {
+//            "fullName" -> {
+//                binding.textViewName.text = DataStore.currentUserData[fieldName]
+//                binding.textViewFullName.text = DataStore.currentUserData[fieldName]
+//            }
+//            "email" -> binding.textViewEmail.text = DataStore.currentUserData[fieldName]
+//            "phoneNumber" -> binding.textViewPhone.text = DataStore.currentUserData[fieldName]
+//        }
     }
 
 }

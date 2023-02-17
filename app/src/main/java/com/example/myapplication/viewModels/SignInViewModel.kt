@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.example.myapplication.singletonData.DataStore
 
 class SignInViewModel: ViewModel() {
+    val email: MutableLiveData<String> = MutableLiveData("username@gmail.com")
+    val password: MutableLiveData<String> = MutableLiveData("12345678")
 
     private var _isErrorEvent: MutableLiveData<String> = MutableLiveData()
     val isErrorEvent: LiveData<String>
@@ -15,16 +17,16 @@ class SignInViewModel: ViewModel() {
     val isSuccessEvent: LiveData<Boolean>
         get() = _isSuccessEvent
 
-    fun onLogin(email: String, password: String) {
+    fun onLogin() {
         var _errorString = ""
-        val foundUser = DataStore.userDataStore.find { userData -> userData["email"] == email }
+        val foundUser = DataStore.userDataStore.find { userData -> userData["email"] == email.value }
 
         if (foundUser == null) {
             _errorString += "Invalid Email or Password"
         }
         else
         {
-            if(password != foundUser["password"])
+            if(password.value != foundUser["password"])
                 _errorString += "Invalid Password"
         }
 
@@ -32,7 +34,7 @@ class SignInViewModel: ViewModel() {
             return _isErrorEvent.postValue(_errorString)
 
         if (foundUser != null) {
-            DataStore.currentUserData = foundUser
+            DataStore.currentUserData.value = foundUser
         }
 
         _isSuccessEvent.postValue(true)

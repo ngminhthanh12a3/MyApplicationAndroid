@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.example.myapplication.viewModels.SignInViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -65,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/login_email_placeholder"
                 android:inputType="textEmailAddress"
-                android:text="username@gmail.com"
+                android:text="@={viewModel.email}"
                 android:textColorHint="#78909C"
                 tools:ignore="TouchTargetSizeCheck" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -97,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/password_placeholder"
                 android:inputType="textPassword"
-                android:text="123456"
+                android:text="@={viewModel.password}"
                 android:textColorHint="#78909C"
                 tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -125,7 +127,8 @@
             android:textColor="#311B92"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewForgotPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewForgotPassword"
+            android:onClick="@{() -> viewModel.onLogin()}"/>
 
         <LinearLayout
             android:id="@+id/don_t_have_account_layout"

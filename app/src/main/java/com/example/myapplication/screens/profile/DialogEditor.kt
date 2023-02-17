@@ -35,7 +35,7 @@ class DialogEditor(private val fieldName: String, private val viewModel:ProfileV
         )
         textViewProfileFieldLabel = rootView.findViewById(R.id.textViewProfileFieldLabel)
 
-        textInputProfileField.setText(DataStore.currentUserData[fieldName])
+        textInputProfileField.setText(DataStore.currentUserData.value?.get(fieldName) ?: "")
         textViewProfileFieldLabel.text = profileFieldLabel[fieldName + "Label"]
 
         return rootView

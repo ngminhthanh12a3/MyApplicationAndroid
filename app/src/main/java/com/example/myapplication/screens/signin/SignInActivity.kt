@@ -20,12 +20,12 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
         viewModel = ViewModelProvider(this)[SignInViewModel::class.java]
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         binding.imageBackButton.setOnClickListener{
             onBackPressed()
         }
-
-        binding.buttonLogin.setOnClickListener { loginOnClick() }
 
         binding.signUpText.setOnClickListener { onSignUpNavigate() }
 
@@ -55,7 +55,4 @@ class SignInActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun loginOnClick() {
-        viewModel.onLogin(binding.emailInputText.text.toString(), binding.passwordInputText.text.toString())
-    }
 }

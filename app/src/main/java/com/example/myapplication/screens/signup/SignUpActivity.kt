@@ -23,7 +23,8 @@ class SignUpActivity : AppCompatActivity() {
         binding =DataBindingUtil.setContentView(this, R.layout.activity_sign_up)
         binding.lifecycleOwner = this
         viewModel = ViewModelProvider(this)[SignUpViewModel::class.java]
-        binding.buttonSignUp.setOnClickListener { onSignUp()}
+        binding.viewModel = viewModel
+
         binding.textViewSignin.setOnClickListener {
             startActivity(Intent(this, SignInActivity::class.java))
             finish()
@@ -53,11 +54,5 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this, "SignUp Success", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    private fun onSignUp() {
-        viewModel.onSignUp(binding.fullNameInputText.text.toString(),
-                            binding.emailInputText.text.toString(),
-                            binding.passwordInputText.text.toString())
     }
 }

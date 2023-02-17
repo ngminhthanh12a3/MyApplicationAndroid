@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.example.myapplication.viewModels.SignUpViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,7 +56,8 @@
                 android:hint="@string/your_full_name_placeholder"
                 android:inputType="textEmailAddress"
                 android:textColorHint="#78909C"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck"
+                android:text="@={viewModel.fullName}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -85,7 +88,8 @@
                 android:hint="@string/your_e_mail_place_holder"
                 android:inputType="textEmailAddress"
                 android:textColorHint="#78909C"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck"
+                android:text="@={viewModel.email}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -116,7 +120,8 @@
                 android:hint="@string/password_placeholder"
                 android:inputType="textPassword"
                 android:textColorHint="#78909C"
-                tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+                tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck"
+                android:text="@={viewModel.password}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -131,7 +136,9 @@
             android:textColor="#311B92"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordTextLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/passwordTextLayout"
+            android:onClick="@{() -> viewModel.onSignUp()}"
+            />
 
         <LinearLayout
             android:layout_width="wrap_content"
