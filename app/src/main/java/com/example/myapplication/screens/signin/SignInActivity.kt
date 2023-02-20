@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivitySignInBinding
-import com.example.myapplication.screens.profile.ProfileActivity
+import com.example.myapplication.screens.restaurant.RestaurantActivity
 import com.example.myapplication.screens.signup.SignUpActivity
 import com.example.myapplication.viewModels.SignInViewModel
 
@@ -45,7 +45,7 @@ class SignInActivity : AppCompatActivity() {
             {
                 // Success
                 Toast.makeText(this, "SignIn Success", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, ProfileActivity::class.java))
+                startActivity(Intent(this, RestaurantActivity::class.java))
             }
         }
     }

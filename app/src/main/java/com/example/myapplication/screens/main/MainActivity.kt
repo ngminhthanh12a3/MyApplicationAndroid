@@ -8,9 +8,9 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.example.myapplication.R
 import com.example.myapplication.screens.onboading.OnboadingItemsAdapter
 import com.example.myapplication.screens.onboading.OnboardingItem
-import com.example.myapplication.R
 import com.example.myapplication.screens.welcome.Welcome
 
 class MainActivity : AppCompatActivity() {

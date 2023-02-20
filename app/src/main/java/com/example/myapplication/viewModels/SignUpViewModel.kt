@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.singletonData.DataStore
+import java.util.regex.Pattern
 
 class SignUpViewModel : ViewModel() {
     val fullName = MutableLiveData<String>()
@@ -18,6 +19,16 @@ class SignUpViewModel : ViewModel() {
     val isSuccessEvent: LiveData<Boolean>
         get() = _isSuccessEvent
 
+    companion object {
+        private val PASSWORD_PATTERN:Pattern = Pattern.compile(
+            "^" +                    // start-of-string
+                "(?=.*[0-9])" +             // # digit must occur at least once
+                "(?=.*[a-z])" +            // a lower case letter must occur at least once
+                "(?=.*[A-Z])" +             // an upper case letter must occur at least once
+                "(?=.*[!@#$%^&*()])" +       // a special character must occur at least once you can replace with your special characters
+                ".{8,}" +                   // at least 8 characters
+                "$")                        // end-of-string
+    }
     fun onSignUp() {
 
         var _errorString = ""
@@ -63,7 +74,7 @@ class SignUpViewModel : ViewModel() {
     }
 
     private fun isPasswordValid(password: String): Boolean {
-        return password.length in 8..10
+        return PASSWORD_PATTERN.matcher(password).matches()
     }
 
 }

@@ -22,7 +22,6 @@ class ProfileActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
         binding.viewModel = viewModel
 
-
         binding.textViewFullName.setOnClickListener {
             DialogEditor("fullName", viewModel).show(
                 supportFragmentManager,
