@@ -5,25 +5,19 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityRestaurantBinding
 import com.example.myapplication.singletonData.DataStore
-import com.example.myapplication.viewModels.RestaurantViewModel
 
 class RestaurantActivity : AppCompatActivity() {
     lateinit var binding: ActivityRestaurantBinding
-    lateinit var viewModel: RestaurantViewModel
     lateinit var adapter: RestaurantAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_restaurant)
-        viewModel =ViewModelProvider(this)[RestaurantViewModel::class.java]
-
-        binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
         setUpRecyclerView()
