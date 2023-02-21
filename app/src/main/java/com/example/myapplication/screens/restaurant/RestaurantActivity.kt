@@ -25,7 +25,6 @@ class RestaurantActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         setUpRecyclerView()
-        loadRestaurantData()
         setUpObservers()
     }
 
@@ -35,10 +34,6 @@ class RestaurantActivity : AppCompatActivity() {
                 adapter.submitList(data)
             }
         }
-    }
-
-    private fun loadRestaurantData() {
-//        viewModel.loadData()
     }
 
     private fun setUpRecyclerView() {

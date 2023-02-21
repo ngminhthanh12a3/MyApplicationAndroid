@@ -2,7 +2,6 @@ package com.example.myapplication.screens.restaurant
 
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +11,7 @@ import com.example.myapplication.databinding.RestaurantItemViewBinding
 import com.example.myapplication.singletonData.DataStore
 import com.example.myapplication.singletonData.Restaurant
 
-class RestaurantViewHolder(private val binding: RestaurantItemViewBinding, private val setList: (MutableList<Restaurant>, Int) -> Unit): RecyclerView.ViewHolder(binding.root) {
+class RestaurantViewHolder(private val binding: RestaurantItemViewBinding, private val setList: (MutableList<Restaurant>) -> Unit): RecyclerView.ViewHolder(binding.root) {
     private lateinit var currentRestaurantData: Restaurant
     init {
         binding.root.setOnClickListener{ showDialog(currentRestaurantData) }
@@ -32,13 +31,10 @@ class RestaurantViewHolder(private val binding: RestaurantItemViewBinding, priva
         alertDialog.setMessage("Do you want to delete this restaurant?")
 
         alertDialog.setPositiveButton("Yes") { _: DialogInterface, _: Int ->
-            val position = DataStore.restaurantData.value?.indexOf(restaurant)
-            DataStore.restaurantData.value?.remove(restaurant)
-
-            Log.i("position", position.toString())
-
-            position?.let { (if(it >= 0) it else null)?.let { it1 -> setList(mutableListOf(), it1) } }
-
+            val newList: MutableList<Restaurant> = mutableListOf()
+            DataStore.restaurantData.value?.let { newList.addAll(it) }
+            newList.remove(restaurant)
+            setList(newList)
         }
         alertDialog.setNegativeButton("No"){ _: DialogInterface, _: Int ->
 
@@ -47,9 +43,9 @@ class RestaurantViewHolder(private val binding: RestaurantItemViewBinding, priva
         alertDialog.show()
     }
     companion object {
-        fun from(parent: ViewGroup, setList: (MutableList<Restaurant>, Int) -> Unit): RestaurantViewHolder {
+        fun from(parent: ViewGroup, setList: (MutableList<Restaurant>) -> Unit): RestaurantViewHolder {
             val binding: RestaurantItemViewBinding = RestaurantItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            return RestaurantViewHolder(binding) { restaurants, position -> setList(restaurants, position) }
+            return RestaurantViewHolder(binding) { setList(it) }
         }
 
     }
