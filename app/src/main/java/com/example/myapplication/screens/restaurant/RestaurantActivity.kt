@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityRestaurantBinding
+import com.example.myapplication.singletonData.DataStore
 import com.example.myapplication.viewModels.RestaurantViewModel
 
 class RestaurantActivity : AppCompatActivity() {
@@ -26,21 +27,16 @@ class RestaurantActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         setUpRecyclerView()
-        setUpObservers()
-    }
-
-    private fun setUpObservers() {
-        viewModel.listOfRestaurant.observe(this) { data ->
-            run {
-                adapter.submitList(data)
-            }
-        }
     }
 
     private fun setUpRecyclerView() {
         binding.rvRestaurant.layoutManager = LinearLayoutManager(this)
         adapter = RestaurantAdapter()
         binding.rvRestaurant.adapter = adapter
+
+        run {
+            adapter.submitList(DataStore.restaurantData.value)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
