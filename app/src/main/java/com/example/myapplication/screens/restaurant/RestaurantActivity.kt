@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityRestaurantBinding
@@ -50,7 +51,8 @@ class RestaurantActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId)
         {
-
+            R.id.menu_item_linear -> binding.rvRestaurant.layoutManager = LinearLayoutManager(this)
+            R.id.menu_item_grid -> binding.rvRestaurant.layoutManager = GridLayoutManager(this, 2)
         }
 
         return super.onOptionsItemSelected(item)
