@@ -1,20 +1,25 @@
 package com.example.myapplication.screens.restaurant
 
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.example.myapplication.singletonData.DataStore
 import com.example.myapplication.singletonData.Restaurant
 
-class RestaurantAdapter: ListAdapter<Restaurant, RestaurantViewHolder>(RestaurantDiffUtil()) {
+interface OnRestaurantItemClick{
+    fun onClickItem(item: View, restaurant: Restaurant)
+
+    fun onLongClick(item: View)
+}
+class RestaurantAdapter(private val callback: OnRestaurantItemClick): ListAdapter<Restaurant, RestaurantViewHolder>(RestaurantDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RestaurantViewHolder {
-        return RestaurantViewHolder.from(parent){ setList(it) }
+        return RestaurantViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: RestaurantViewHolder, position: Int) {
         val idol = getItem(position)
-        holder.bindData(idol)
+        holder.bindData(idol, callback)
     }
 
     class RestaurantDiffUtil: DiffUtil.ItemCallback<Restaurant>()   {
@@ -50,12 +55,5 @@ class RestaurantAdapter: ListAdapter<Restaurant, RestaurantViewHolder>(Restauran
                     oldList[oldItemPosition].address == newList[newItemPosition].address
         }
 
-    }
-
-    private fun setList(newList: MutableList<Restaurant>) {
-        DataStore.restaurantData.value?.let { RestaurantDiffUtilCallback(it, newList) }
-            ?.let { DiffUtil.calculateDiff(it).dispatchUpdatesTo(this) }
-        DataStore.restaurantData.value?.clear()
-        DataStore.restaurantData.value?.addAll(newList)
     }
 }
