@@ -38,4 +38,8 @@ class ProfileViewModel:ViewModel() {
         _isErrorEvent.postValue("Blank Input")
     }
 
+    fun onLogOut(){
+        DataStore.currentUserData.postValue(null)
+    }
+
 }

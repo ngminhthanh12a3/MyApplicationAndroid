@@ -1,5 +1,6 @@
 package com.example.myapplication.viewModels
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.view.View
@@ -10,7 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.screens.restaurant.RestaurantActivity
 import com.example.myapplication.singletonData.DataStore
 import com.example.myapplication.singletonData.Restaurant
 
@@ -24,12 +24,10 @@ class RestaurantViewModel : ViewModel() {
     val menuLayoutType: LiveData<Int>
         get() = _menuLayoutType
 
-    fun getLayout(restaurantActivity: RestaurantActivity): RecyclerView.LayoutManager {
+    fun getLayout(restaurantActivity: Activity): RecyclerView.LayoutManager {
         return when (_menuLayoutType.value) {
             R.id.menu_item_linear -> LinearLayoutManager(restaurantActivity)
-            else -> {
-                GridLayoutManager(restaurantActivity, 2)
-            }
+            else -> {GridLayoutManager(restaurantActivity, 2)}
         }
     }
 

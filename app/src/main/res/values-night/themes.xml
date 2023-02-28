@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MyApplication" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="Theme.MyApplication" parent="Theme.AppCompat.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -16,20 +16,5 @@
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/icon</item>
         <item name="android:windowSplashScreenAnimationDuration">1000</item>
         <item name="android:windowSplashScreenBehavior">icon_preferred</item>
-    </style>
-
-    <!-- Base application_restaurant theme. -->
-    <style name="Theme.MyApplication.Restaurant" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
     </style>
 </resources>

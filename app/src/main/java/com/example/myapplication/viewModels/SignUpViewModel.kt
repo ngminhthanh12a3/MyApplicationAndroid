@@ -15,7 +15,7 @@ class SignUpViewModel : ViewModel() {
     val isErrorEvent: LiveData<String>
         get() = _isErrorEvent
 
-    private var _isSuccessEvent: MutableLiveData<Boolean> = MutableLiveData()
+    private var _isSuccessEvent: MutableLiveData<Boolean> = MutableLiveData(false)
     val isSuccessEvent: LiveData<Boolean>
         get() = _isSuccessEvent
 
