@@ -28,6 +28,21 @@ class WelcomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
         }
+
+        activity?.let {
+            val preferences = it.getSharedPreferences("PREFERENCE", 0)
+            val FirstTime = preferences.getString("FirstTimeRun", "")
+
+            if(FirstTime != "Yes")
+            {
+                val editor = preferences.edit()
+                editor.putString("FirstTimeRun", "Yes")
+                editor.apply()
+
+                val controller = findNavController()
+                controller.navigate(R.id.action_welcomeFragment_to_onboardingFragment)
+            }
+        }
     }
 
     override fun onCreateView(
