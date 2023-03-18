@@ -56,12 +56,15 @@
     </fragment>
     <fragment
         android:id="@+id/restaurantFragment"
-        android:name="com.example.myapplication.screens.restaurant.RestaurantFragment"
+        android:name="com.example.myapplication.screens.home.HomeFragment"
         android:label="RestaurantFragment"
         >
         <action
             android:id="@+id/action_restaurantFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_restaurantFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -71,4 +74,8 @@
             android:id="@+id/action_profileFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.example.myapplication.screens.movie.MovieFragment"
+        android:label="MovieFragment" />
 </navigation>

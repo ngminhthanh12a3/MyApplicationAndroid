@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="restaurantData"
-            type="com.example.myapplication.singletonData.Restaurant" />
+            name="movieData"
+            type="com.example.myapplication.singletonData.Movie" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/restaurant_avt"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="92dp"
+            android:layout_height="92dp"
             android:contentDescription="@string/app_name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,8 +28,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="92dp"
             android:paddingStart="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,16 +39,19 @@
                 android:id="@+id/restaurant_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{restaurantData.resName}"
+                android:text="@{movieData.title.trim()}"
+                app:layout_constraintBottom_toTopOf="@+id/restaurant_address"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/restaurant_address"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="10dp"
-                android:text="@{restaurantData.address}"
+                android:ellipsize="end"
+                android:text="@{movieData.overview.trim()}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/restaurant_name" />
         </androidx.constraintlayout.widget.ConstraintLayout>

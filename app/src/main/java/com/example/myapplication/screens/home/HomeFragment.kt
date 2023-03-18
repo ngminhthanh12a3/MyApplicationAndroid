@@ -1,4 +1,4 @@
-package com.example.myapplication.screens.restaurant
+package com.example.myapplication.screens.home
 
 import android.os.Bundle
 import android.view.*
@@ -7,21 +7,20 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DiffUtil
 import com.example.myapplication.R
-import com.example.myapplication.databinding.FragmentRestaurantBinding
-import com.example.myapplication.singletonData.DataStore
-import com.example.myapplication.singletonData.Restaurant
-import com.example.myapplication.viewModels.RestaurantViewModel
+import com.example.myapplication.databinding.FragmentHomeBinding
+import com.example.myapplication.singletonData.Movie
+import com.example.myapplication.viewModels.HomeViewModel
+
 /**
  * A simple [Fragment] subclass.
- * Use the [RestaurantFragment.newInstance] factory method to
+ * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class RestaurantFragment : Fragment() {
-    lateinit var binding: FragmentRestaurantBinding
-    lateinit var adapter: RestaurantAdapter
-    lateinit var viewModel: RestaurantViewModel
+class HomeFragment : Fragment() {
+    lateinit var binding: FragmentHomeBinding
+    lateinit var adapter: HomeAdapter
+    lateinit var viewModel: HomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
@@ -35,23 +34,35 @@ class RestaurantFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_restaurant, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.lifecycleOwner = this
-        viewModel = ViewModelProvider(this)[RestaurantViewModel::class.java]
+        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
-        setUpRecyclerView()
-        setUpViewModelObservers()
         // Inflate the layout for this fragment
 
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.homeNav.setOnItemSelectedListener {
+            viewModel.setTabID(it.itemId)
+            true
+        }
+        setUpRecyclerView()
+        setUpViewModelObservers()
+    }
+
     override fun onResume() {
         super.onResume()
         (activity as AppCompatActivity?)!!.supportActionBar?.show()
-        (activity as AppCompatActivity?)!!.supportActionBar?.title = "My restaurants"
+        (activity as AppCompatActivity?)!!.supportActionBar?.title = "My movies"
     }
 
+    override fun onPause() {
+        super.onPause()
+        (activity as AppCompatActivity?)!!.supportActionBar?.hide()
+    }
     override fun onDestroy() {
         super.onDestroy()
         (activity as AppCompatActivity?)!!.supportActionBar?.hide()
@@ -61,14 +72,12 @@ class RestaurantFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
          * @return A new instance of fragment RestaurantFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RestaurantFragment().apply {
+        fun newInstance() =
+            HomeFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
@@ -80,18 +89,18 @@ class RestaurantFragment : Fragment() {
         }
 
         viewModel.newList.observe(viewLifecycleOwner){
-            setList(it)
+            adapter.submitList(it)
+        }
+
+        viewModel.tabID.observe(viewLifecycleOwner){
+            viewModel.getMovies()
         }
     }
 
     private fun setUpRecyclerView() {
         binding.rvRestaurant.layoutManager = activity?.let { viewModel.getLayout(it) }
-        adapter = RestaurantAdapter(onRestaurantItemClick)
+        adapter = HomeAdapter(onRestaurantItemClick)
         binding.rvRestaurant.adapter = adapter
-
-        run {
-            adapter.submitList(DataStore.restaurantData.value)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -107,16 +116,17 @@ class RestaurantFragment : Fragment() {
             R.id.menu_item_avatar -> {
                 val controller = findNavController()
                 controller.navigate(R.id.action_restaurantFragment_to_profileFragment)
-                (activity as AppCompatActivity?)!!.supportActionBar?.hide()
             }
         }
 
         return super.onOptionsItemSelected(item)
     }
 
-    private val onRestaurantItemClick = object : OnRestaurantItemClick{
-        override fun onClickItem(item: View, restaurant: Restaurant) {
-            viewModel.handleItemWhenClicked(item, restaurant)
+    private val onRestaurantItemClick = object : OnHomeItemClick{
+        override fun onClickItem(item: View, restaurant: Movie) {
+            val controller = findNavController()
+            viewModel.handleItemWhenClicked(item, restaurant, controller)
+
         }
 
         override fun onLongClick(item: View) {
@@ -124,15 +134,4 @@ class RestaurantFragment : Fragment() {
         }
     }
 
-    private fun setList(newList: MutableList<Restaurant>) {
-        DataStore.restaurantData.value?.let {
-            RestaurantAdapter.RestaurantDiffUtilCallback(
-                it,
-                newList
-            )
-        }
-            ?.let { DiffUtil.calculateDiff(it).dispatchUpdatesTo(adapter) }
-        DataStore.restaurantData.value?.clear()
-        DataStore.restaurantData.value?.addAll(newList)
-    }
 }
