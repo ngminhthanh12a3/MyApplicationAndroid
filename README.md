@@ -2,3 +2,4 @@
 # Branch: [Thử thách tuần 3](https://github.com/ngminhthanh12a3/MyApplicationAndroid/tree/W3_C)
 # Branch: [Thử thách tuần 4](https://github.com/ngminhthanh12a3/MyApplicationAndroid/tree/W4_C)
 # Branch: [Thử thách tuần 5](https://github.com/ngminhthanh12a3/MyApplicationAndroid/tree/W5_C)
+# Branch: [Thử thách tuần 6](https://github.com/ngminhthanh12a3/MyApplicationAndroid/tree/W6_C)
